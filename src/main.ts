@@ -73,3 +73,19 @@ console.log(`Estadísticas de usuarios -> Activos: ${stats.active} | Inactivos: 
 // Probar retorno múltiple (tupla)
 const [userName, userRole, status] = getUserSummary(firstUser);
 console.log(`Resumen -> Usuario: ${userName}, Rol: ${userRole}, Estado: ${status}`);
+
+
+//  Ciclo 5 — Asincronía, Fetch API y Async/Await
+
+import { fetchUsersFromAPI } from "./services/api.service";
+
+const initApp = async () => {
+    console.log("🚀 Iniciando aplicación...");
+
+    const externalUsers = await fetchUsersFromAPI();
+
+    console.log(`✅ Se recibieron ${externalUsers.length} usuarios desde el servidor.`);
+    console.table(externalUsers.map(u => ({ ID: u.id, Nombre: u.name, Email: u.email })));
+};
+
+initApp();
